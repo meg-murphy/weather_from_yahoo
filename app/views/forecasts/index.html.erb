@@ -1,15 +1,12 @@
-<h2> Welcome to Yahoo Weather. </h2>
-<h4> Please enter a city and state below to see the five day forecast </h4>
+<h2> Welcome to the Weather App. </h2>
+<h4> Please enter your city's woeid id to see current weather </h4>
+<p> You can look up woeid’s with this tool: http://woeid.rosselliot.co.nz/ </p>
 
 <%= form_tag "/", method: :get do %>
 <form class="form-inline">
 
   <div class="form-group">
-     <%= text_field_tag :city, nil, placeholder: "City", class: "form-control"%>
-  </div>
-
-  <div class="form-group">
-    <%= text_field_tag :state, nil, placeholder: "State", class: "form-control"%>
+     <%= text_field_tag :woeid, nil, placeholder: "Woeid", class: "form-control"%>
   </div>
 
   <div>
@@ -18,12 +15,13 @@
 
 <% end %>
 
-<h2><%= @title %> Five Day Forecast </h2>
 
-<% @forecasts_five_day.each do |forecast| %>
-  <h4> Date: <%= forecast["date"]%> </h4>
-  <h4> Day: <%= forecast["day"]%> </h4>
-  <p> High: <%= forecast["high"]%> </p>
-  <p> Low: <%= forecast["low"]%> </p>
-  <p> Text: <%= forecast["text"]%> </p>
-<% end %>
+<h2> <%= @response_fahrenheit.title %> </h2>
+<h4> Temp: <%= @response_celsius.condition.temp %> degrees Celsius </h4>
+<h4> Temp: <%= @response_fahrenheit.condition.temp %> degrees Fahrenheit </h4>
+<h4> Conditions: <%= @response_fahrenheit.condition.text %> </h4>
+
+
+<%=image_tag @response_fahrenheit.image.url %>
+
+<%= @response_fahrenheit_3_day.high %>
